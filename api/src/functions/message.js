@@ -19,6 +19,6 @@ app.http('message', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
-        return { body: JSON.stringify({ "text": `Hello, from the API @ ${new Date().toLocaleString()}` }) };
+        return { body: JSON.stringify({ "text": `Hello, from the API @ ${new Date().toLocaleString()} with Secret Key: ${process.env.SECRET_KEY}`}) };
     }
 });
