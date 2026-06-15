@@ -14,11 +14,13 @@
 
 
 const { app } = require('@azure/functions');
+const { getSecret } = require('../shared/keyvault');
 
 app.http('message', {
     methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
-        return { body: JSON.stringify({ "text": `Hello, from the API @ ${new Date().toLocaleString()}, with Secret Key: ${process.env.SECRET_KEY}`}) };
+        const secretKey = await getSecret('SECRET_KEY');
+        return { body: JSON.stringify({ "text": `Hello, from the API @ ${new Date().toLocaleString()}, with Secret Key: ${secretKey}`}) };
     }
 });
